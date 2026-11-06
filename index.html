@@ -12,10 +12,12 @@
 
     <meta name="color-scheme" content="dark light">
     <script>
-        try { if (localStorage.getItem("kanbanTema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
+        try { if (localStorage.getItem("caseOS_demo_kanbanTema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
     </script>
 
-    <title>Processos e Projetos | Ordens de Serviço</title>
+    <title>Case de Projeto | Gestão de Ordens de Serviço</title>
+    <meta name="description" content="Case interativo de uma solução Kanban para organização e acompanhamento de Ordens de Serviço, com histórico, indicadores e recursos de dados.">
+    <meta name="theme-color" content="#202124">
 
 
     <style>
@@ -3501,12 +3503,117 @@
         .btn-tema { min-width: 0; }
         .btn-tema .icon { width: 16px; height: 16px; }
 
+
+/* =====================================================
+   CASE STUDY PRESENTATION LAYER
+===================================================== */
+.case-hero{position:relative;overflow:hidden;padding:64px 28px 26px;background:radial-gradient(ellipse at 82% 8%,rgba(102,157,246,.18),transparent 35%),linear-gradient(135deg,#17191d 0%,#20242b 58%,#1b2028 100%);border-bottom:1px solid #343a44}
+.case-hero:after{content:"";position:absolute;width:430px;height:430px;right:-170px;bottom:-300px;border:1px solid rgba(138,180,248,.12);border-radius:50%;box-shadow:0 0 0 45px rgba(138,180,248,.025),0 0 0 90px rgba(138,180,248,.02);pointer-events:none}
+.case-hero-inner,.case-context-inner,.case-after-inner{max-width:1450px;margin:0 auto;position:relative;z-index:1}
+.case-kicker,.case-section-label{font-size:10px;letter-spacing:.16em;font-weight:800;color:#8ab4f8}
+.case-kicker{display:flex;align-items:center;gap:9px;margin-bottom:27px}
+.case-kicker-dot,.demo-pill span{width:7px;height:7px;border-radius:50%;background:#81c995;box-shadow:0 0 0 4px rgba(129,201,149,.12)}
+.case-hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.7fr);gap:clamp(35px,7vw,105px);align-items:center}
+.case-copy h1{max-width:850px;color:#f2f5fa;font-size:clamp(34px,4.7vw,59px);line-height:1.06;letter-spacing:-.045em;font-weight:760}
+.case-lead{max-width:790px;margin-top:23px;color:#c5d0df;font-size:17px;line-height:1.65}
+.case-narrative{max-width:790px;margin-top:14px;color:#9daaba;font-size:13px;line-height:1.8}
+.case-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:27px}
+.case-primary,.case-secondary{display:inline-flex;align-items:center;gap:16px;min-height:43px;padding:0 17px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:800}
+.case-primary{background:#8ab4f8;color:#17212d}
+.case-primary:hover{background:#aecbfa}
+.case-secondary{border:1px solid #424b59;color:#d6deea}
+.case-secondary:hover{background:rgba(255,255,255,.06)}
+.case-note{display:flex;align-items:center;gap:9px;margin-top:23px;color:#8f9bab;font-size:10px}
+.case-note-mark{display:grid;place-items:center;width:17px;height:17px;border:1px solid #64748b;border-radius:50%;font-weight:800}
+.case-aside{padding:21px 22px;background:rgba(34,40,49,.72);border:1px solid rgba(156,174,199,.17);border-radius:13px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.case-aside-label{padding-bottom:14px;margin-bottom:5px;border-bottom:1px solid rgba(156,174,199,.15);font-size:10px;font-weight:800;letter-spacing:.12em;color:#8d9bad;text-transform:uppercase}
+.case-feature{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid rgba(156,174,199,.1)}
+.case-feature:last-child{border:0;padding-bottom:3px}
+.case-feature-num{font-size:11px;color:#8ab4f8;font-weight:800;padding-top:2px}
+.case-feature b{display:block;color:#e5ebf4;font-size:12px}
+.case-feature small{display:block;margin-top:4px;color:#9ba8b8;font-size:10px;line-height:1.5}
+.case-scroll-hint{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:47px;color:#758295;font-size:10px;letter-spacing:.04em}
+.case-scroll-hint span{width:1px;height:22px;background:#8ab4f8}
+.case-context{padding:31px 28px 28px;background:#242a33;border-bottom:1px solid #353d49}
+.case-context-inner{display:grid;grid-template-columns:minmax(250px,.75fr) minmax(300px,1.25fr);gap:50px;align-items:center}
+.case-context h2,.case-after h2,.case-footer h2{margin-top:9px;color:#edf2f8;font-size:clamp(20px,2.4vw,29px);line-height:1.2;letter-spacing:-.025em}
+.case-context-inner p,.case-after-heading p,.case-footer>p{color:#aab5c4;font-size:12px;line-height:1.8}
+.case-flow{max-width:1450px;margin:25px auto 0;display:flex;align-items:center;justify-content:space-between;gap:9px;overflow-x:auto;padding:0 0 5px;white-space:nowrap}
+.case-flow span{padding:9px 12px;border:1px solid #414b59;border-radius:7px;color:#d7e0ec;font-size:10px;font-weight:700;background:#2b323d}
+.case-flow i{color:#8295ae;font-style:normal;font-size:12px}
+.demo-ribbon{max-width:1450px;margin:0 auto;padding:25px 0 13px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.demo-ribbon>div{display:flex;flex-direction:column;gap:5px}
+.demo-ribbon strong{color:#8ab4f8;font-size:9px;letter-spacing:.13em}
+.demo-ribbon>div>span{color:#9aa5b4;font-size:10px;line-height:1.5}
+.demo-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid rgba(129,201,149,.25);border-radius:20px;color:#b6d9bf;font-size:9px;font-weight:800;letter-spacing:.08em;white-space:nowrap}
+.demo-pill span{width:6px;height:6px}
+.case-after{padding:60px 28px;background:#242a33;border-top:1px solid #343c48}
+.case-after-heading{max-width:660px}
+.case-after-heading p{margin-top:10px}
+.case-how-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.case-how-grid article{padding:18px;background:#2b323d;border:1px solid #414b59;border-radius:10px}
+.case-how-grid article>span{color:#8ab4f8;font-size:10px;font-weight:850}
+.case-how-grid h3{margin-top:14px;color:#e8edf5;font-size:13px}
+.case-how-grid p{margin-top:7px;color:#a5b0bf;font-size:10px;line-height:1.7}
+.case-footer{padding:43px 28px 20px;background:#191d23;border-top:1px solid #343c48}
+.case-footer>div:first-child,.case-footer>p,.case-footer-line{max-width:1450px;margin-left:auto;margin-right:auto}
+.case-footer>p{margin-top:13px;max-width:900px}
+.case-footer-line{display:flex;justify-content:space-between;gap:20px;margin-top:35px;padding-top:15px;border-top:1px solid #343c48;color:#738094;font-size:9px;letter-spacing:.1em;font-weight:800}
+.case-footer-line span{font-weight:600}
+.header{margin-top:0}
+#aplicacao{scroll-margin-top:16px}
+@media(max-width:900px){.case-hero{padding:45px 22px 23px}.case-hero-grid{grid-template-columns:1fr;gap:27px}.case-aside{max-width:none}.case-context-inner{grid-template-columns:1fr;gap:14px}.case-how-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.demo-ribbon{margin:0 20px}}
+@media(max-width:600px){.case-hero{padding:36px 17px 20px}.case-copy h1{font-size:35px}.case-lead{font-size:14px}.case-narrative{font-size:12px}.case-scroll-hint{margin-top:30px}.case-context,.case-after{padding:32px 17px}.case-flow{margin-top:18px}.case-flow span{font-size:9px}.demo-ribbon{margin:0 15px;align-items:flex-start;flex-direction:column;padding-top:21px}.case-how-grid{grid-template-columns:1fr}.case-footer{padding:34px 17px 18px}.case-footer-line{flex-direction:column;gap:8px}.header-actions{flex-wrap:wrap!important}.header-actions .view-tabs{order:0}.header-actions .menu{order:1}.header-actions .btn-tema{order:2}.header-actions>.btn-primary{order:3}}
+
 </style>
 
 </head>
 
 
 <body>
+
+
+<section class="case-hero" aria-labelledby="case-title">
+  <div class="case-hero-inner">
+    <div class="case-kicker"><span class="case-kicker-dot"></span> CASE INTERATIVO · GESTÃO DE PROCESSOS</div>
+    <div class="case-hero-grid">
+      <div class="case-copy">
+        <h1 id="case-title">De uma necessidade operacional a uma solução inteligente para gestão de Ordens de Serviço.</h1>
+        <p class="case-lead">O que começou como uma iniciativa para organizar demandas do dia a dia se transformou em uma solução digital completa para gestão e acompanhamento de Ordens de Serviço.</p>
+        <p class="case-narrative">Com apoio de ferramentas de Inteligência Artificial desenvolvi uma aplicação própria baseada em Kanban, que integra gestão visual, rastreabilidade, controle operacional e indicadores de desempenho em um único ambiente. Uma solução concebida a partir de uma necessidade real e ampliada para transformar a maneira de visualizar, organizar e acompanhar o fluxo de trabalho.</p>
+        <div class="case-actions">
+          <a class="case-primary" href="#aplicacao">Explorar a ferramenta <span aria-hidden="true">↓</span></a>
+          <a class="case-secondary" href="#sobre-o-projeto">Conhecer o projeto</a>
+        </div>
+        <div class="case-note"><span class="case-note-mark">i</span> Esta é uma versão independente para demonstração. Todos os registros iniciais são fictícios.</div>
+      </div>
+      <aside class="case-aside">
+        <div class="case-aside-label">Conheça os diferenciais da solução</div>
+        <div class="case-feature"><span class="case-feature-num">01</span><div><b>Gestão inteligente do fluxo</b><small>Seis etapas integradas para visualizar e acompanhar a jornada das Ordens de Serviço.</small></div></div>
+        <div class="case-feature"><span class="case-feature-num">02</span><div><b>Rastreabilidade operacional</b><small>Histórico de movimentações, acompanhamento de períodos e consulta às informações de cada OS.</small></div></div>
+        <div class="case-feature"><span class="case-feature-num">03</span><div><b>Inteligência em indicadores</b><small>Cinco indicadores de desempenho para transformar registros operacionais em informações estratégicas.</small></div></div>
+        <div class="case-feature"><span class="case-feature-num">04</span><div><b>Gestão e portabilidade de dados</b><small>Filtros, exportação para Excel e recursos de backup e restauração em JSON.</small></div></div>
+      </aside>
+    </div>
+    <div class="case-scroll-hint"><span></span>A solução está disponível para exploração logo abaixo. Conheça suas funcionalidades e descubra como cada recurso foi desenvolvido.</div>
+  </div>
+</section>
+<section class="case-context" id="sobre-o-projeto" aria-label="Contexto do projeto">
+  <div class="case-context-inner">
+    <div><span class="case-section-label">01 / A ORIGEM</span><h2>Tudo começa com uma oportunidade de fazer melhor.</h2></div>
+    <p>Na rotina profissional da Jotta Manutenções, diferentes demandas, setores e prazos exigiam organização e acompanhamento constantes. Relatórios técnicos, apresentações executivas e solicitações de diferentes equipes faziam parte de um fluxo de trabalho dinâmico, no qual manter a visibilidade sobre cada atividade era fundamental.</p>
+    <p>Foi nesse cenário que identifiquei uma oportunidade: transformar um acompanhamento baseado em anotações e lembretes em uma estrutura digital, centralizada e visual.</p>
+    <p>A primeira versão nasceu como uma ferramenta individual de organização. Mas a ideia foi além. Identificando novas possibilidades de aplicação, desenvolvi uma estrutura específica para Ordens de Serviço, ampliando progressivamente suas funcionalidades até chegar a uma solução que integra gestão visual, controle de etapas, rastreabilidade e indicadores.</p>
+  </div>
+  <div class="case-flow" aria-label="Etapas do fluxo">
+    <span>Entrada</span><i>→</i><span>Em andamento</span><i>→</i><span>Em aguardo</span><i>→</i><span>Encaminhados ao orçamento</span><i>↔</i><span>Em revisão</span><i>→</i><span>Arquivadas</span>
+  </div>
+</section>
+<div class="demo-ribbon" id="aplicacao">
+  <div><strong>02 / AMBIENTE DE DEMONSTRAÇÃO</strong><span>Explore uma versão demonstrativa da aplicação e conheça os recursos desenvolvidos. Navegue pelo Kanban, interaja com os registros, experimente as movimentações e descubra como as informações se conectam aos indicadores.</span></div>
+  <span class="demo-pill"><span></span> DADOS FICTÍCIOS</span>
+</div>
+
 
 
 <!-- =====================================================
@@ -3631,15 +3738,15 @@
                 </div>
 
                 <div>
-                    <div class="brand-name">PROCESSOS E PROJETOS<span> - CARLOS</span></div>
-                    <div class="brand-subtitle">GESTÃO DE RELATÓRIOS TÉCNICOS E OUTROS PROCESSOS</div>
+                    <div class="brand-name">CASE DE PROJETO<span> · KANBAN OS</span></div>
+                    <div class="brand-subtitle">GESTÃO VISUAL · PROCESSOS · INDICADORES</div>
                 </div>
 
             </div>
 
             <div class="page-heading">
                 <h1>Ordens de Serviço</h1>
-                <p>Controle suas operações de manutenção de forma visual, rápida e organizada.</p>
+                <p>Ambiente demonstrativo para explorar o fluxo de trabalho e os recursos da solução.</p>
             </div>
 
         </div>
@@ -3747,7 +3854,7 @@
 
         <div class="kanban-heading">
             <h2>Fluxo de trabalho</h2>
-            <span>Arraste os Post-its para alterar a etapa</span>
+            <span>Arraste os cartões ou use as ações para alterar a etapa · Entrada → andamento → aguardo → orçamento → revisão → arquivamento</span>
         </div>
 
         <div class="kanban-topscroll" id="kanbanTopScroll" hidden aria-hidden="true"><div id="kanbanTopScrollInner"></div></div>
@@ -3840,6 +3947,25 @@
     </section>
 
 </main>
+
+
+<section class="case-after" aria-label="Como explorar o projeto">
+  <div class="case-after-inner">
+    <div class="case-after-heading"><span class="case-section-label">03 / EXPLORAÇÃO</span><h2>Experimente o fluxo completo.</h2><p>Use os dados fictícios como ponto de partida. As alterações feitas durante a visita permanecem apenas no armazenamento local desta demonstração.</p></div>
+    <div class="case-how-grid">
+      <article><span>01</span><h3>Abra um cartão</h3><p>Consulte os dados da OS, complemente informações e observe os detalhes registrados.</p></article>
+      <article><span>02</span><h3>Movimente uma OS</h3><p>Use as ações do cartão ou arraste-o para outra etapa. Algumas transições solicitam motivo ou informação complementar.</p></article>
+      <article><span>03</span><h3>Observe os indicadores</h3><p>Acesse a aba Indicadores e altere o período ou o segmento para explorar as métricas disponíveis.</p></article>
+      <article><span>04</span><h3>Teste os dados</h3><p>Abra o menu Dados para exportar planilhas ou gerar um backup JSON da demonstração.</p></article>
+    </div>
+  </div>
+</section>
+<footer class="case-footer">
+  <div><span class="case-section-label">04 / CONTINUIDADE</span><h2>Uma solução que evolui com o processo.</h2></div>
+  <p>O desenvolvimento deste projeto envolveu estruturar o fluxo, definir regras de movimentação, organizar dados e construir uma primeira camada de indicadores. Como próximos passos de evolução, a análise comparativa dos dados e a investigação de possíveis gargalos podem aprofundar a compreensão do desempenho operacional. Essas análises devem ser realizadas a partir de dados consistentes e de períodos comparáveis.</p>
+  <div class="case-footer-line">CASE DE PROJETO · KANBAN DE ORDENS DE SERVIÇO <span>DEMONSTRAÇÃO INDEPENDENTE</span></div>
+</footer>
+
 
 <!-- =====================================================
      MODAL — OS
@@ -4081,12 +4207,12 @@
     ===================================================== */
 
     const CHAVES = {
-        ultimoBackup: "kanbanUltimoBackup",
-        ordens: "ordensKanban",
-        historico: "historicoKanban",
-        aguardos: "aguardosKanban",
-        copiaPreMigracao: "ordensKanban_pre_v2_3",
-        demo: "kanbanDemoCarregada"
+        ultimoBackup: "caseOS_demo_ultimoBackup",
+        ordens: "caseOS_demo_ordens",
+        historico: "caseOS_demo_historico",
+        aguardos: "caseOS_demo_aguardos",
+        copiaPreMigracao: "caseOS_demo_ordens_pre_v2_3",
+        demo: "caseOS_demo_carregada"
     };
 
     const ETAPAS = [
@@ -5309,7 +5435,7 @@
     function alternarTema() {
         const novo = temaAtual() === "dark" ? "light" : "dark";
         aplicarTema(novo);
-        try { localStorage.setItem("kanbanTema", novo); } catch (e) { /* ignora */ }
+        try { localStorage.setItem("caseOS_demo_kanbanTema", novo); } catch (e) { /* ignora */ }
     }
 
 
