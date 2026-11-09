@@ -12,7 +12,7 @@
 
     <meta name="color-scheme" content="dark light">
     <script>
-        try { document.documentElement.dataset.theme = localStorage.getItem("caseOS_demo_kanbanTema") === "dark" ? "dark" : "light"; } catch (e) { document.documentElement.dataset.theme = "light"; }
+        try { if (localStorage.getItem("caseOS_demo_kanbanTema") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
     </script>
 
     <title>Case de Projeto | Kanban de Ordens de Serviço · Carlos Bittencourt</title>
@@ -3506,22 +3506,22 @@
 
 /* =====================================================
    CAMADA DE APRESENTAÇÃO · ESTILO CORPORATIVO
-   Navy #12263f + azul #1f5fbf, com laranja complementar
+   Navy #0a0d12 + azul #1f5fbf, com laranja complementar
    Post-its saturados como único elemento de personalidade
 ===================================================== */
 html{scroll-behavior:smooth}
 .header{margin-top:0}
 #aplicacao{scroll-margin-top:16px}
-:root{--ink:#12263f;--ink-2:#3b4a5e;--ink-3:#5b6b80;--line:#dfe5ee;--soft:#f5f7fa;--blue:#1f5fbf;--blue-d:#174a96;--orange:#f08a24;--orange-t:#b45309}
+:root{--rp-ink:#0a0d12;--rp-ink-2:#1c232c;--rp-ink-3:#3a4450;--rp-line:#c3ccd7;--rp-soft:#f5f6f8;--rp-blue:#0a0d12;--rp-blue-d:#2a3340;--rp-orange:#f08a24;--rp-orange-t:#0a0d12}
 .rp-wrap{max-width:1120px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
-.rp-hero,.rp-sec{position:relative;overflow:hidden;color:var(--ink-2)}
+.rp-hero,.rp-sec{position:relative;overflow:hidden;color:var(--rp-ink-2)}
 .rp-sec{padding:76px 0;background:#fff}
-.rp-context{background:#fff}.rp-demo{background:var(--soft);padding-bottom:64px}.rp-how{background:#fff}.rp-results{background:var(--soft)}.rp-author{background:#fff}
-.rp-sec p,.rp-hero p{font-size:16px;line-height:1.7;color:var(--ink-2)}
-.rp-sec h2{margin:12px 0 0;color:var(--ink);font-size:clamp(25px,2.7vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.02em;max-width:24ch}
-.rp-sec h3{color:var(--ink);font-size:clamp(19px,2vw,24px);line-height:1.25;font-weight:700;letter-spacing:-.015em}
-.rp-label{display:inline-flex;align-items:center;gap:10px;color:var(--orange-t);font-size:12px;font-weight:700;line-height:1;letter-spacing:.13em;text-transform:uppercase}
-.rp-label:before{content:"";width:22px;height:3px;border-radius:2px;background:var(--orange)}
+.rp-context{background:#fff}.rp-demo{background:var(--rp-soft);padding-bottom:64px}.rp-how{background:#fff}.rp-results{background:var(--rp-soft)}.rp-author{background:#fff}
+.rp-sec p,.rp-hero p{font-size:16px;line-height:1.7;color:var(--rp-ink-2)}
+.rp-sec h2{margin:12px 0 0;color:var(--rp-ink);font-size:clamp(25px,2.7vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.02em;max-width:24ch}
+.rp-sec h3{color:var(--rp-ink);font-size:clamp(19px,2vw,24px);line-height:1.25;font-weight:700;letter-spacing:-.015em}
+.rp-label{display:inline-flex;align-items:center;gap:10px;color:var(--rp-orange-t);font-size:12px;font-weight:700;line-height:1;letter-spacing:.13em;text-transform:uppercase}
+.rp-label:before{content:"";width:26px;height:4px;border-radius:2px;background:var(--rp-ink)}
 .rp-two{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,80px);align-items:start}
 .rp-two>*{min-width:0}
 .rp-text p+p{margin-top:14px}
@@ -3530,22 +3530,22 @@ html{scroll-behavior:smooth}
 .rp-sec>.rp-wrap,.rp-hero>.rp-wrap{z-index:1}
 
 /* ---------- abertura ---------- */
-.rp-hero{padding:26px 0 56px;background:radial-gradient(ellipse at 85% 0%,rgba(31,95,191,.10),transparent 45%),linear-gradient(180deg,#fff 0%,#eef3fa 100%);border-bottom:1px solid var(--line)}
-.rp-hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(31,95,191,.16) 1px,transparent 1.4px);background-size:26px 26px;-webkit-mask-image:linear-gradient(100deg,transparent 35%,#000 95%);mask-image:linear-gradient(100deg,transparent 35%,#000 95%);pointer-events:none}
-.rp-topbar{display:flex;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.rp-hero h1{margin:72px 0 0;max-width:13ch;color:var(--ink);font-size:clamp(38px,5.2vw,66px);line-height:1.04;font-weight:700;letter-spacing:-.035em}
-.rp-lead{margin-top:22px;max-width:560px;font-size:18px!important;line-height:1.6!important;color:var(--ink-2)}
-.rp-byline{margin-top:18px;font-size:14px!important;color:var(--ink-3)!important}
-.rp-byline b{color:var(--ink)}
+.rp-hero{padding:26px 0 56px;background:#fff;border-bottom:1px solid var(--rp-line)}
+.rp-hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(10,13,18,.16) 1px,transparent 1.4px);background-size:26px 26px;-webkit-mask-image:linear-gradient(100deg,transparent 35%,#000 95%);mask-image:linear-gradient(100deg,transparent 35%,#000 95%);pointer-events:none}
+.rp-topbar{display:flex;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:2px solid var(--rp-ink);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rp-ink-2)}
+.rp-hero h1{margin:72px 0 0;max-width:13ch;color:var(--rp-ink);font-size:clamp(38px,5.2vw,66px);line-height:1.04;font-weight:700;letter-spacing:-.035em}
+.rp-lead{margin-top:22px;max-width:560px;font-size:18px!important;line-height:1.6!important;color:var(--rp-ink-2)}
+.rp-byline{margin-top:18px;font-size:14px!important;color:var(--rp-ink-2)!important}
+.rp-byline b{color:var(--rp-ink)}
 .rp-actions{display:flex;align-items:center;gap:22px;margin-top:30px;flex-wrap:wrap}
-.rp-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:8px;background:var(--blue);color:#fff;font-size:15px;font-weight:600;text-decoration:none;transition:background .15s}
-.rp-btn:hover{background:var(--blue-d)}
-.rp-link{color:var(--blue);font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
-.rp-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,auto));justify-content:start;margin-top:56px;border-top:1px solid var(--line)}
-.rp-kpis>div{padding:18px 34px 0 0;margin-right:34px;border-right:1px solid var(--line)}
+.rp-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:8px;background:var(--rp-blue);color:#fff;font-size:15px;font-weight:600;text-decoration:none;transition:background .15s}
+.rp-btn:hover{background:var(--rp-blue-d)}
+.rp-link{color:var(--rp-blue);font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.rp-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,auto));justify-content:start;margin-top:56px;border-top:2px solid var(--rp-ink)}
+.rp-kpis>div{padding:18px 34px 0 0;margin-right:34px;border-right:1px solid var(--rp-line)}
 .rp-kpis>div:last-child{border-right:0;margin-right:0}
-.rp-kpis dt{color:var(--ink);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
-.rp-kpis dd{margin:4px 0 0;color:var(--ink-3);font-size:13px}
+.rp-kpis dt{color:var(--rp-ink);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.rp-kpis dd{margin:4px 0 0;color:var(--rp-ink-3);font-size:13px;font-weight:500}
 
 /* ---------- post-its ---------- */
 .pi{position:relative;width:var(--s,110px);aspect-ratio:1;filter:drop-shadow(0 8px 10px rgba(18,38,63,.22));transform:rotate(var(--r,0deg));pointer-events:none}
@@ -3570,33 +3570,33 @@ html{scroll-behavior:smooth}
 @keyframes piFly{from{opacity:0;transform:translate(var(--fx,160px),var(--fy,-120px)) rotate(calc(var(--r) + 55deg)) scale(.55)}60%{opacity:1}to{opacity:1;transform:rotate(var(--r))}}
 @keyframes piFloat{0%,100%{transform:rotate(var(--r)) translateY(0)}50%{transform:rotate(calc(var(--r) + 2.2deg)) translateY(-10px)}}
 .rp-path{position:absolute;left:52%;top:4%;width:44%;height:90%;opacity:.35;overflow:visible}
-.rp-path path{fill:none;stroke:var(--blue);stroke-width:1.6;stroke-dasharray:3 9;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.rp-path path{fill:none;stroke:var(--rp-blue);stroke-width:1.6;stroke-dasharray:3 9;stroke-linecap:round;vector-effect:non-scaling-stroke}
 
 /* ---------- seções ---------- */
-.rp-gap{margin-top:72px;padding-top:56px;border-top:1px solid var(--line)}
+.rp-gap{margin-top:72px;padding-top:56px;border-top:1px solid var(--rp-line)}
 .rp-gap p{margin-top:10px}
 .rp-chart{display:block;width:100%;max-width:280px;height:auto;margin-top:26px}
 .rp-list{list-style:none;display:grid}
-.rp-list li{position:relative;padding:15px 0 15px 22px;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:16px;line-height:1.6}
+.rp-list li{position:relative;padding:15px 0 15px 22px;border-bottom:1px solid var(--rp-line);color:var(--rp-ink-2);font-size:16px;line-height:1.6}
 .rp-list li:first-child{padding-top:0}.rp-list li:last-child{border-bottom:0}
-.rp-list li:before{content:"";position:absolute;left:0;top:25px;width:8px;height:8px;border-radius:2px;background:var(--orange)}
+.rp-list li:before{content:"";position:absolute;left:0;top:25px;width:8px;height:8px;border-radius:2px;background:var(--rp-ink)}
 .rp-list li:first-child:before{top:10px}
 .rp-demo .rp-wrap>p{max-width:520px;margin-top:12px}
 .rp-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:38px}
-.rp-cards article{background:#fff;border:1px solid var(--line);border-top:4px solid var(--tab);border-radius:8px;padding:22px 20px}
-.rp-cards article>span{color:var(--ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
+.rp-cards article{background:#fff;border:1px solid var(--rp-line);border-top:4px solid var(--tab);border-radius:8px;padding:22px 20px}
+.rp-cards article>span{color:var(--rp-ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
 .rp-cards h3{margin-top:8px;font-size:18px}
-.rp-cards p{margin-top:8px;font-size:15px;color:var(--ink-3)}
+.rp-cards p{margin-top:8px;font-size:15px;color:var(--rp-ink-3)}
 .rp-intro{margin-top:14px;max-width:640px}
 .rp-steps{list-style:none;counter-reset:st;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:34px}
-.rp-steps li{counter-increment:st;position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.rp-steps li:before{content:"0" counter(st);color:var(--ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
+.rp-steps li{counter-increment:st;position:relative;background:#fff;border:1px solid var(--rp-line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rp-steps li:before{content:"0" counter(st);color:var(--rp-ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
 .rp-steps li:after{content:"";position:absolute;right:16px;top:-8px;width:32px;height:14px;background:var(--tab);transform:rotate(4deg);border-radius:1px;box-shadow:0 2px 4px rgba(18,38,63,.2)}
-.rp-steps b{color:var(--ink);font-size:17px}
-.rp-steps span{color:var(--ink-3);font-size:15px;line-height:1.55}
+.rp-steps b{color:var(--rp-ink);font-size:17px}
+.rp-steps span{color:var(--rp-ink-3);font-size:15px;line-height:1.55}
 .rp-name{margin-top:12px!important;font-size:clamp(30px,3.6vw,44px)!important;max-width:none!important}
-.rp-role{margin-top:6px;color:var(--ink-3)!important;font-size:15px!important}
-.rp-footer{background:var(--ink);color:#c5d0de;font-size:13px}
+.rp-role{margin-top:6px;color:var(--rp-ink-3)!important;font-size:15px!important}
+.rp-footer{background:var(--rp-ink);color:#c5d0de;font-size:13px}
 .rp-footer-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:20px;padding-bottom:20px}
 
 /* ---------- responsivo ---------- */
@@ -3635,26 +3635,70 @@ html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rp-fly .pi{animation:none;opacity:1;transform:rotate(var(--r))}}
 
 /* ---------- storytelling: capítulos e pontes ---------- */
-.rp-idea{background:var(--soft)}.rp-outcome{background:#fff}.rp-results{background:var(--soft)}.rp-how{background:#fff}.rp-demo{background:var(--soft)}.rp-context{background:#fff}.rp-author{background:var(--soft)}
-.rp-bridge{display:flex;align-items:center;gap:12px;margin-top:30px!important;color:var(--ink)!important;font-size:19px!important;font-weight:700;letter-spacing:-.01em;line-height:1.35!important}
-.rp-bridge span{display:inline-grid;place-items:center;flex:0 0 30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;font-size:16px}
+.rp-idea{background:var(--rp-soft)}.rp-outcome{background:#fff}.rp-results{background:var(--rp-soft)}.rp-how{background:#fff}.rp-demo{background:var(--rp-soft)}.rp-context{background:#fff}.rp-author{background:var(--rp-soft)}
+.rp-bridge{display:flex;align-items:center;gap:12px;margin-top:30px!important;color:var(--rp-ink)!important;font-size:19px!important;font-weight:700;letter-spacing:-.01em;line-height:1.35!important}
+.rp-bridge span{display:inline-grid;place-items:center;flex:0 0 30px;height:30px;border-radius:50%;background:var(--rp-orange);color:#fff;font-size:16px}
 .rp-bridge-b{margin-top:56px!important}
 .rp-idea .rp-wide{max-width:780px}
-.rp-indic{margin-top:56px;padding:30px 32px 32px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.rp-indic{margin-top:56px;padding:30px 32px 32px;background:#fff;border:1px solid var(--rp-line);border-radius:10px}
 .rp-indic .rp-text{max-width:820px;margin-top:12px}
 .rp-ind-grid{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:24px}
-.rp-ind-grid li{position:relative;padding:18px 14px 14px;border:1px solid var(--line);border-top:4px solid var(--tab);border-radius:6px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;line-height:1.4;display:flex;flex-direction:column;gap:8px}
-.rp-ind-grid li span{color:var(--ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
+.rp-ind-grid li{position:relative;padding:18px 14px 14px;border:1px solid var(--rp-line);border-top:4px solid var(--tab);border-radius:6px;background:#fff;color:var(--rp-ink);font-size:14px;font-weight:600;line-height:1.4;display:flex;flex-direction:column;gap:8px}
+.rp-ind-grid li span{color:var(--rp-ink-3);font-size:12px;font-weight:700;letter-spacing:.1em}
 .rp-check{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 40px;margin-top:30px;max-width:900px}
-.rp-check li{position:relative;padding-left:32px;color:var(--ink);font-size:16px;line-height:1.5}
-.rp-check li:before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--blue)}
+.rp-check li{position:relative;padding-left:32px;color:var(--rp-ink);font-size:16px;line-height:1.5}
+.rp-check li:before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--rp-blue)}
 .rp-check li:after{content:"";position:absolute;left:7px;top:6px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
 .rp-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px}
-.rp-panels article{background:var(--soft);border:1px solid var(--line);border-top:4px solid var(--tab);border-radius:8px;padding:24px}
+.rp-panels article{background:var(--rp-soft);border:1px solid var(--rp-line);border-top:4px solid var(--tab);border-radius:8px;padding:24px}
 .rp-panels h3{font-size:19px}
 .rp-panels p{margin-top:10px;font-size:15.5px}
 @media(max-width:1000px){.rp-ind-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rp-panels{grid-template-columns:1fr}.rp-indic{padding:24px 20px}}
 @media(max-width:600px){.rp-ind-grid{grid-template-columns:1fr}.rp-check{grid-template-columns:1fr}.rp-bridge{font-size:17px!important}}
+
+/* ---------- contraste máximo: preto sobre branco; Kanban em modo escuro ---------- */
+:root{--rp-ink:#0a0d12;--rp-ink-2:#161d29;--rp-ink-3:#2f3a4b;--rp-line:#b3bdca;--rp-soft:#ffffff;--rp-blue:#0a0d12;--rp-blue-d:#262e3b;--rp-orange-t:#0a0d12}
+.rp-hero,.rp-sec,.rp-context,.rp-idea,.rp-demo,.rp-how,.rp-results,.rp-outcome,.rp-author{background:#fff}
+.rp-hero{border-bottom:1px solid var(--rp-line)}
+.rp-hero:before{background-image:radial-gradient(rgba(10,13,18,.16) 1px,transparent 1.4px)}
+.rp-sec{border-top:1px solid var(--rp-line)}
+.rp-context{border-top:0}
+.rp-topbar{color:var(--rp-ink);border-bottom-color:var(--rp-ink)}
+.rp-label:before{background:var(--rp-ink);height:3px}
+.rp-label{color:var(--rp-ink)}
+.rp-list li:before{background:var(--rp-ink)}
+.rp-bridge span{background:var(--rp-ink)}
+.rp-btn{background:var(--rp-ink);color:#fff}
+.rp-btn:hover{background:var(--rp-blue-d)}
+.rp-link{color:var(--rp-ink)}
+.rp-path path{stroke:var(--rp-ink);opacity:.55}
+.rp-path{opacity:.5}
+.rp-kpis{border-top:2px solid var(--rp-ink)}
+.rp-kpis>div{border-right-color:var(--rp-line)}
+.rp-gap{border-top:2px solid var(--rp-ink)}
+.rp-cards article,.rp-steps li,.rp-ind-grid li,.rp-panels article,.rp-indic{border-color:var(--rp-line)}
+.rp-cards article,.rp-steps li,.rp-ind-grid li,.rp-panels article{border-top-width:5px}
+.rp-indic{border-width:1px 1px 1px 1px;border-top:2px solid var(--rp-ink)}
+.rp-list li{border-bottom-color:var(--rp-line)}
+.rp-check li:before{background:var(--rp-ink)}
+.rp-footer{background:var(--rp-ink);color:#fff}
+.rp-sec p,.rp-hero p{color:var(--rp-ink-2)}
+.rp-byline{color:var(--rp-ink-2)!important}
+.rp-cards p,.rp-steps span,.rp-kpis dd,.rp-role{color:var(--rp-ink-3)!important}
+
+/* ---------- contraste: texto e barras escuros, fundo branco ---------- */
+.rp-sec,.rp-idea,.rp-context,.rp-demo,.rp-how,.rp-results,.rp-outcome,.rp-author{background:#fff}
+.rp-sec{border-top:1px solid var(--rp-line)}
+.rp-sec h2,.rp-sec h3,.rp-hero h1{color:#05070a}
+.rp-sec p,.rp-sec li,.rp-hero p{color:var(--rp-ink-2)}
+.rp-cards article,.rp-steps li,.rp-ind-grid li{border-color:#aab4c1}
+.rp-panels article,.rp-indic{border-color:#aab4c1}
+.rp-cards article>span,.rp-steps li:before,.rp-ind-grid li span{color:var(--rp-ink-2)}
+.rp-cards p,.rp-steps span,.rp-role{color:var(--rp-ink-2)!important}
+.rp-list li{border-bottom-color:#aab4c1}
+.rp-footer{background:#05070a;color:#e3e8ef}
+.rp-btn{background:#05070a}.rp-btn:hover{background:#2a3340}
+.rp-link{color:#05070a;text-decoration-thickness:2px}
 </style>
 
 </head>
@@ -3729,14 +3773,14 @@ html{scroll-behavior:smooth}
         <h3>Organizar não bastava: faltava medir.</h3>
         <p>O primeiro quadro mostrava o que estava em curso, mas não o desempenho do processo.</p>
         <svg class="rp-chart" viewBox="0 0 280 120" role="img" aria-label="Ilustração de gráfico de barras feito de post-its" focusable="false">
-          <line x1="8" y1="104" x2="272" y2="104" stroke="#cfd8e3" stroke-width="1.5"/>
+          <line x1="8" y1="104" x2="272" y2="104" stroke="#7d8999" stroke-width="1.5"/>
           <g transform="rotate(-2 40 104)"><rect x="22" y="64" width="34" height="40" rx="2" fill="#4DABF7"/></g>
           <g transform="rotate(1.5 90 104)"><rect x="72" y="42" width="34" height="62" rx="2" fill="#FFD43B"/></g>
           <g transform="rotate(-1 140 104)"><rect x="122" y="76" width="34" height="28" rx="2" fill="#FF922B"/></g>
           <g transform="rotate(2 190 104)"><rect x="172" y="28" width="34" height="76" rx="2" fill="#51CF66"/></g>
           <g transform="rotate(-1.5 240 104)"><rect x="222" y="52" width="34" height="52" rx="2" fill="#9775FA"/></g>
-          <path d="M30 56 L 88 34 L 138 68 L 188 18 L 240 44" fill="none" stroke="#12263f" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round"/>
-          <circle cx="240" cy="44" r="4.5" fill="#12263f"/>
+          <path d="M30 56 L 88 34 L 138 68 L 188 18 L 240 44" fill="none" stroke="#0a0d12" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round"/>
+          <circle cx="240" cy="44" r="4.5" fill="#0a0d12"/>
         </svg>
       </div>
       <ul class="rp-list">
@@ -3773,7 +3817,7 @@ html{scroll-behavior:smooth}
     <p>Abra cartões, arraste as OS entre as colunas e consulte os indicadores. Os registros são fictícios e ficam apenas neste navegador.</p>
     <div class="rp-tip" aria-hidden="true">
       <div class="pi pi-yellow" style="--s:112px;--r:6deg;right:70px;top:0"><div class="pi-note"><b>Dica</b><span>Arraste os cartões entre as colunas</span></div></div>
-      <svg viewBox="0 0 90 80" focusable="false"><path d="M8 6 C 60 4, 84 30, 70 70" fill="none" stroke="#12263f" stroke-width="2.2" stroke-linecap="round"/><path d="M58 58 L 70 72 L 80 56" fill="none" stroke="#12263f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 90 80" focusable="false"><path d="M8 6 C 60 4, 84 30, 70 70" fill="none" stroke="#0a0d12" stroke-width="2.2" stroke-linecap="round"/><path d="M58 58 L 70 72 L 80 56" fill="none" stroke="#0a0d12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
 </section>
@@ -4172,8 +4216,10 @@ html{scroll-behavior:smooth}
         <div class="rp-mono" aria-hidden="true"><div class="pi pi-blue" style="--s:124px;--r:-5deg;left:0;top:0"><div class="pi-note mono"><b>CB</b><span>Processos · IA · Kanban</span></div></div></div>
       </div>
       <div class="rp-text">
-        <p>Cresci na Cachoeira de Cocais, um ponto de ecoturismo, onde aprendi a observar pessoas e pequenos negócios. Esse olhar, somado à curiosidade por tecnologia e inovação, me levou à Segurança da Informação.</p>
-        <p>Na formação, participei do projeto de segurança corporativa W.W. Clínicas (gestão de projetos, BPMN e análise de riscos) e criei a Operação Ímã por CPU, em que usei o Excel para precificação e organização de dados. Hoje, no estágio, aplico IA e Kanban para ganhar eficiência. Busco um ambiente para contribuir com desafios de Processos, unindo pessoas, negócios e tecnologia.</p>
+        <p>Cresci em contato com a natureza, na Cachoeira de Cocais, um ponto de ecoturismo, onde aprendi a olhar com atenção para pessoas e pequenos negócios. Esse olhar se encontrou com a curiosidade por inovação e tecnologia e me levou à Segurança da Informação.</p>
+        <p>Na formação, participei do projeto de segurança corporativa W.W. Clínicas, com gestão de projetos, mapeamento de processos (BPMN), análise de riscos e trabalho em equipe. Na Operação Ímã por CPU, projeto autoral, usei o Excel para estruturar precificações e organizar dados.</p>
+        <p>Hoje estagio em uma indústria de manutenção, onde aplico IA e Kanban para ganhar eficiência e busco unir três dimensões: compreender pessoas, estruturar negócios e usar tecnologia para resolver problemas. Busco ambientes onde eu possa contribuir com desafios de Governança e Processos.</p>  
+          
       </div>
     </div>
   </div>
