@@ -3695,15 +3695,6 @@
       <li>O protótipo permitia excluir qualquer OS, o que podia apagar informações necessárias à análise.</li>
     </ul>
   </div>
-  <p class="case-flow-title">A meta mudou: acompanhar o desempenho da operação e gerar informação confiável para relatórios gerenciais. A resposta foi um fluxo de seis etapas, com data e hora registradas automaticamente em cada movimentação.</p>
-  <div class="case-flow" role="list" aria-label="Etapas do fluxo">
-    <span role="listitem">Entrada</span><i aria-hidden="true">→</i>
-    <span role="listitem">Em andamento</span><i aria-hidden="true">→</i>
-    <span role="listitem">Em aguardo</span><i aria-hidden="true">→</i>
-    <span role="listitem">Encaminhados ao orçamento</span><i aria-hidden="true">↔</i>
-    <span role="listitem">Em revisão</span><i aria-hidden="true">→</i>
-    <span role="listitem">Arquivadas</span>
-  </div>
 </section>
 
 <section class="case-demo" id="aplicacao" aria-label="A solução em funcionamento">
@@ -6930,12 +6921,63 @@
     try { demoJaCarregada = !!localStorage.getItem(CHAVES.demo); } catch (e) { /* armazenamento indisponível */ }
 
     if (ordens.length === 0 && !demoJaCarregada) {
-        ordens = [
-            { id: "1", numero: "OS-001", cliente: "Empresa ABC", servico: "Manutenção preventiva", responsavel: "João", prioridade: "Alta", dataAbertura: "2026-08-10", prazo: "2026-08-12", status: "todo", descricao: "Realizar manutenção preventiva no equipamento." },
-            { id: "2", numero: "OS-002", cliente: "Indústria Nova", servico: "Inspeção elétrica", responsavel: "Carlos", prioridade: "Média", dataAbertura: "2026-08-11", prazo: "2026-08-18", status: "doing", descricao: "Verificar painel elétrico e identificar possíveis falhas." },
-            { id: "3", numero: "OS-003", cliente: "Metalúrgica Alfa", servico: "Troca de componente", responsavel: "Marcos", prioridade: "Alta", dataAbertura: "2026-08-12", prazo: "2026-08-20", status: "waiting", descricao: "Aguardando chegada do componente para execução do serviço." },
-            { id: "4", numero: "OS-004", cliente: "Empresa Beta", servico: "Revisão de equipamento", responsavel: "João", prioridade: "Baixa", dataAbertura: "2026-08-05", prazo: "2026-08-10", status: "done", descricao: "Revisão concluída sem necessidade de intervenções adicionais." }
+        // Datas relativas a hoje, para que prazos e tempos de espera façam sentido em qualquer dia da visita.
+        const iso = (diasAtras, hora) => {
+            const d = new Date(Date.now() - diasAtras * MS_DIA);
+            d.setHours(hora, 0, 0, 0);
+            return d.toISOString();
+        };
+        const prazoEm = dias => isoParaDataLocal(new Date(Date.now() + dias * MS_DIA).toISOString());
+
+        const base = [
+            // entrada: ainda não iniciadas
+            { numero: "OS-001", cliente: "Empresa ABC",       servico: "Revisão de talha elétrica",       responsavel: "João",   prioridade: "Alta",  prazo: prazoEm(5),  segmento: "Içamentos",         descricao: "Revisar talha elétrica de 2 toneladas e emitir relatório técnico de reparo.", entrada: iso(1, 9),  etapa: "entrada" },
+            { numero: "OS-002", cliente: "Indústria Nova",    servico: "Reparo de lavadora de piso",      responsavel: "Marcos", prioridade: "Média", prazo: prazoEm(9),  segmento: "Limpeza Industrial", descricao: "Diagnosticar falha no motor de tração da lavadora de piso.",                  entrada: iso(1, 14), etapa: "entrada" },
+            { numero: "OS-003", cliente: "Metalúrgica Alfa",  servico: "Manutenção de empilhadeira",      responsavel: "Carlos", prioridade: "Baixa", prazo: prazoEm(14), segmento: "Movimentação",       descricao: "Manutenção preventiva e inspeção de empilhadeira elétrica.",                  entrada: iso(0, 8),  etapa: "entrada" },
+            // andamento: relatório em elaboração
+            { numero: "OS-004", cliente: "Empresa Beta",      servico: "Reparo de bomba hidráulica",      responsavel: "João",   prioridade: "Alta",  prazo: prazoEm(2),  segmento: "Hidráulicos",        descricao: "Elaborar relatório técnico do reparo da bomba hidráulica.",                    entrada: iso(6, 9),  etapa: "andamento", inicio: iso(4, 10) },
+            { numero: "OS-005", cliente: "Siderúrgica Delta", servico: "Revisão de chave de impacto",     responsavel: "Marcos", prioridade: "Média", prazo: prazoEm(6),  segmento: "Elétricos",          descricao: "Registrar o reparo da chave de impacto e anexar fotos da desmontagem.",       entrada: iso(5, 11), etapa: "andamento", inicio: iso(3, 9) },
+            // aguardo: dependem de terceiros
+            { numero: "OS-006", cliente: "Mineradora Gama",   servico: "Reparo de bomba de lubrificação", responsavel: "Carlos", prioridade: "Alta",  prazo: prazoEm(4),  segmento: "Lubrificação",       descricao: "Relatório pronto para a etapa final, falta confirmar dados do equipamento.",  entrada: iso(9, 9),  etapa: "aguardo",   inicio: iso(7, 10), aguardoDesde: iso(4, 15), motivo: "Aguardando informações do cliente", detalhe: "Número de série e horas de uso solicitados ao cliente." },
+            { numero: "OS-007", cliente: "Logística Ômega",   servico: "Inspeção de guincho de alavanca", responsavel: "João",   prioridade: "Baixa", prazo: prazoEm(11), segmento: "Içamentos",          descricao: "Inspeção concluída em bancada, aguardando laudo de terceiros.",               entrada: iso(11, 9), etapa: "aguardo",   inicio: iso(8, 9),  aguardoDesde: iso(5, 11), motivo: "Aguardando terceiros",              detalhe: "Laudo de carga enviado ao laboratório externo." }
         ];
+
+        ordens = [];
+        historico = [];
+        aguardos = [];
+
+        base.forEach((b, i) => {
+            const os = {
+                id: String(i + 1),
+                numero: b.numero,
+                cliente: b.cliente,
+                servico: b.servico,
+                responsavel: b.responsavel,
+                prioridade: b.prioridade,
+                dataAbertura: isoParaDataLocal(b.entrada),
+                prazo: b.prazo,
+                validacaoNecessaria: "Não",
+                segmento: b.segmento,
+                descricao: b.descricao,
+                status: b.etapa,
+                dataEntrada: b.entrada,
+                dataPrimeiroInicio: b.inicio || null,
+                dataPrimeiraConclusao: null,
+                dataArquivamento: null,
+                registroExcluido: false,
+                conclusaoProvisoria: false
+            };
+            ordens.push(os);
+
+            registrarEvento(os.id, "", "entrada", { tipo: "Entrada", dataHora: b.entrada });
+            if (b.inicio) registrarEvento(os.id, "entrada", "andamento", { tipo: "Movimentacao", dataHora: b.inicio });
+            if (b.etapa === "aguardo") {
+                registrarEvento(os.id, "andamento", "aguardo", { tipo: "Inicio_Aguardo", dataHora: b.aguardoDesde, motivo: b.motivo, detalhe: b.detalhe });
+                abrirAguardo(os.id, b.aguardoDesde, b.motivo, b.detalhe);
+            }
+        });
+
+        salvar();
         try { localStorage.setItem(CHAVES.demo, "1"); } catch (e) { /* ignora */ }
     }
 
